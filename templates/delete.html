@@ -1,0 +1,30 @@
+ {% extends "base.html" %}
+ {% block content %}
+  <div class="container-fluid"><div class="row">
+    <div class="col-lg-11">
+      <h1 class="page-header">{{titulo}}?</h1>
+    </div>
+  </div></div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panle-body">
+
+          <form method="post">{% csrf_token %}
+            <div class="col-lg-6">
+              <input type="submit" value="Confirmar" class="btn btn-primary form-control"/>
+            </div>
+            <div class="col-lg-6">
+            <a href={{ url }}><input type="button" value="Cancelar" class="btn btn-primary form-control"/></a> 
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "modal.html" %}
+
+{% endblock %}

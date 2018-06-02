@@ -1,0 +1,81 @@
+ {% extends "base.html" %}
+ {% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header"></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span>Trabajador: {{object.nombre}}</span>
+        </div>
+
+        <div class="panle-body">
+          <div class="panel panel-container">
+        	  <div class="row">
+
+              <div class="col-lg-4 no-padding">
+        			  <div class="panel panel-blue panel-widget border-right">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
+        					  <div class="large">{{ventas}}</div>
+        					  <div class="text-muted">Ventas</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-4 no-padding">
+        			  <div class="panel panel-orange panel-widget border-right">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
+        					  <div class="large">{{prestados}}</div>
+        					  <div class="text-muted">Prestados</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-4 no-padding">
+        			  <div class="panel panel-red panel-widget border-right ">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
+        					  <div class="large">{{dañados}}</div>
+        					  <div class="text-muted">Dañados</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+            </div><!--/.row-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span>Prestamos activos</span>
+        </div>
+        <div class="panle-body">
+          {% load render_table from django_tables2 %} {% render_table table %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span>Productos reportados como dañados</span>
+        </div>
+        <div class="panle-body">
+          {% load render_table from django_tables2 %} {% render_table tabledañado %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

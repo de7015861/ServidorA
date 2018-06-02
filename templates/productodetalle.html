@@ -1,0 +1,147 @@
+ {% extends "base.html" %}
+ {% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header"></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span>Producto: {{object.codigo_de_barras}}  {{object.producto}}</span>
+        </div>
+
+        <div class="panle-body">
+          <div class="panel panel-container">
+        	  <div class="row">
+
+              <div class="col-lg-2 no-padding">
+        			  <div class="panel panel-teal panel-widget border-right">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-plus-circle color-blue"></em>
+        					  <div class="large">+{{entradas}}</div>
+        					  <div class="text-muted">Entrantes</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-2 no-padding">
+        			  <div class="panel panel-blue panel-widget border-right">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-minus-circle color-orange"></em>
+        					  <div class="large">-{{salidas}}</div>
+        					  <div class="text-muted">Salidas</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-2 no-padding">
+        			  <div class="panel panel-orange panel-widget border-right">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-teal"></em>
+        					  <div class="large">-{{ventas}}</div>
+        					  <div class="text-muted">Ventas</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-2 no-padding">
+        			  <div class="panel panel-red panel-widget border-right ">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-arrow-circle-o-down color-red"></em>
+        					  <div class="large">-{{producir}}</div>
+        					  <div class="text-muted">Producir</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-2 no-padding">
+        			  <div class="panel panel-red panel-widget border-right ">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-arrow-circle-o-up color-red"></em>
+        					  <div class="large">+{{producido}}</div>
+        					  <div class="text-muted">Producido</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+              <div class="col-lg-2 no-padding">
+        			  <div class="panel panel-red panel-widget ">
+        				  <div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
+        					  <div class="large">{{object.stock}}</div>
+        					  <div class="text-muted">Stock</div>
+        				  </div>
+        			  </div>
+        		  </div>
+
+            </div><!--/.row-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Ventas</h4>
+        </div>
+        <div class="panle-body">
+          {% load render_table from django_tables2 %} {% render_table tableventas %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Entradas</h4>
+        </div>
+        <div class="panle-body">
+          {% load render_table from django_tables2 %} {% render_table tableentradas %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h4>Salidas</h4>
+          </div>
+          <div class="panle-body">
+            {% load render_table from django_tables2 %} {% render_table tablesalidas %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h4>Producctos para produccion</h4>
+          </div>
+          <div class="panle-body">
+            {% load render_table from django_tables2 %} {% render_table tableproducir %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h4>Productos producidos</h4>
+          </div>
+          <div class="panle-body">
+            {% load render_table from django_tables2 %} {% render_table tableproducido %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
