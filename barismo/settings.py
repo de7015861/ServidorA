@@ -25,7 +25,7 @@ SECRET_KEY = '(9=!g^yer#iz9npg(050b&j*%zua+2xjh!=)bdplqkld7sf02y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['barismo.pythonanywhere.com']
+ALLOWED_HOSTS = ['barismo.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition

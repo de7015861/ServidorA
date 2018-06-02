@@ -13,8 +13,6 @@ from io import BytesIO
 from entrada.models import *
 from salida.models import *
 from produccion.models import *
-from django.views.generic.base import RedirectView
-from django.core.urlresolvers import reverse_lazy
 
 
 
@@ -359,19 +357,3 @@ def reporteproduccion(request,pk):
     buffer.close()
     response.write(pdf)
     return response
-
-
-class crearproductos(RedirectView):
-    pattern_name = 'producto'
-
-    def get_redirect_url(self, *args, **kwargs):
-        for i in range(2000):
-            producto = Producto(
-                producto = 'producto' + str(i),
-                detalles = 'producto' + str(i),
-                codigo_de_barras = 'producto' + str(i),
-                tipo_del_producto = 'producto' + str(i),
-                unidades = 'kg',
-            )
-            producto.save()
-        return reverse_lazy('producto')

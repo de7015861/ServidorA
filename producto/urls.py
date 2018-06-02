@@ -2,7 +2,6 @@ from django.conf.urls import url
 from .autocomplete import *
 from .views import *
 from barismo.utils import *
-from reporte.views import crearproductos
 
 
 urlpatterns = [
@@ -13,5 +12,4 @@ urlpatterns = [
     url(r'^(?P<pk>[-\w]+)/update/$',ProductoUpdate.as_view(), name='producto_update'),
     url(r'^(?P<pk>[-\w]+)/eliminar/$',ProductoDelete.as_view(), name='producto_eliminar'),
     url(r'^(?P<pk>[-\w]+)/reporte/$',ProductoPDFView.as_view(), name='producto_reporte'),
-    url(r'^crear/$',crearproductos.as_view(), name='producto_crear'),
 ]
