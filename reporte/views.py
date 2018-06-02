@@ -127,7 +127,7 @@ def reporteventa(request, pk):
 
     data[26][3] = "$" +  format(sub, '.2f')
     if venta.iva > 0:
-        data[27][3] = "$" + format(sub * venta.iva, '.2f')
+        data[27][3] = "$" + format(sub * venta.iva / 100, '.2f')
     else:
         data[27][3] = "$0.00"
     data[28][3] = "$" + str(venta.total)
