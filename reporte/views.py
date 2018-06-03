@@ -166,6 +166,7 @@ def reporteventa(request, pk):
     response.write(pdf)
     return response
 
+@login_required(login_url='/admin/login/')
 def reporteentrada(request,pk):
     #definimos los modelos para el reporte
     entrada = Entrada.objects.get(pk=pk)
@@ -230,6 +231,7 @@ def reporteentrada(request,pk):
     response.write(pdf)
     return response
 
+@login_required(login_url='/admin/login/')
 def reportesalida(request,pk):
     #definimos los modelos para el reporte
     salida = Salida.objects.get(pk=pk)
@@ -294,6 +296,7 @@ def reportesalida(request,pk):
     response.write(pdf)
     return response
 
+@login_required(login_url='/admin/login/')
 def reporteproduccion(request,pk):
     #definimos los modelos para el reporte
     salida = Produccion.objects.get(pk=pk)
