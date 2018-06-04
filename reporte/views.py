@@ -17,14 +17,14 @@ from produccion.models import *
 
 
 
-datos = {   'razon_social': '**************',
-            'rfc' : '*********',
-            'direccion' : '****************',
-            'cp' : '**************',
-            'ciudad' : '********************',
-            'estado' : '*****************',
-            'telefono' : '***************',
-            'correo' : '*****************',
+datos = {   'razon_social': 'Grupo Barismo S de RL de CV',
+            'rfc' : 'GBA160112QQ6',
+            'direccion' : 'Playa Hemosillo #104 Col. San Pablo Comevi',
+            'cp' : '76125',
+            'ciudad' : 'Queretaro',
+            'estado' : 'Queretaro',
+            'telefono' : '2-35-42-37',
+            'correo' : 'contacto@barismoallimite.com.mx',
             }
 
 @login_required(login_url='/admin/login/')
