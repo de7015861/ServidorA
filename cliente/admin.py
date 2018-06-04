@@ -8,7 +8,8 @@ class ClienteResource(resources.ModelResource):
 
     class Meta:
         model = Cliente
-        fields = ('id','contacto', 'direccion_entrega', 'razon_social', 'rfc',
+        import_id_fields = ('isbn',)
+        fields = (contacto', 'direccion_entrega', 'razon_social', 'rfc',
         'direccion', 'codigo_postal', 'ciudad', 'credito', 'correo', 'telefono')
 
 class ClienteAdmin(ImportExportModelAdmin):
