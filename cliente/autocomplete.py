@@ -7,7 +7,6 @@ class ClienteAutocomplete(Select2QuerySetView):
         qs = Cliente.objects.all()
         if self.q:
             qset = (
-                Q(nombre__icontains=self.q) |
                 Q(contacto__icontains=self.q) |
                 Q(razon_social__icontains=self.q) |
                 Q(rfc__icontains=self.q) |
