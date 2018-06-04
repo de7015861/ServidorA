@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'cliente',
     'produccion',
     'venta',
+    'import_export',
 ]
 
 MIDDLEWARE = [

@@ -30,7 +30,5 @@ class Producto(models.Model):
         return format_html('<a class="btn btn-primary" href=/producto/{}/eliminar role="button">\
                                 <em class="fa fa-times">&nbsp;</em></a>\
                             <a class="btn btn-primary" href=/producto/{}/update role="button">\
-                                <em class="fa fa-pencil-square-o"></em></a>\
-                            <a class="btn btn-primary" href=/producto/{}/reporte role="button">\
-                                <em class="fa fa-file"></em></a>',
+                                <em class="fa fa-pencil-square-o"></em></a>',
                             self.pk,self.pk,self.pk)
