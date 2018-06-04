@@ -44,7 +44,7 @@ def reporteventa(request, pk):
 
     #informacion de la empresa
     c.setFont("Helvetica", 30)
-    #c.drawImage("static/reporte/logo-barismo1.jpg", 50, 680, width=220, height=90)
+    c.drawImage("static/reporte/logo-barismo1.jpg", 50, 680, width=220, height=90)
     c.setFont("Helvetica", 8)
     c.drawString(250, 745, datos['razon_social'])
     c.drawString(250, 735, datos['rfc'])
