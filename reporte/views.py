@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from reportlab.platypus import Table, TableStyle
 from reportlab.lib.pagesizes import letter
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
@@ -9,11 +9,18 @@ from .numeroaletra import to_word
 from reportlab.lib import colors
 from django.views import View
 from venta.models import *
+from venta.tables import *
 from io import BytesIO
 from entrada.models import *
 from salida.models import *
 from produccion.models import *
+from produccion.tables import ProductoProduccionTable
+from .form import *
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
+from django.core.urlresolvers import reverse_lazy
 import os.path
+from django.db.models import Count, Sum
 
 
 datos = {   'razon_social': 'Grupo Barismo S de RL de CV',
@@ -360,3 +367,74 @@ def reporteproduccion(request,pk):
     buffer.close()
     response.write(pdf)
     return response
+
+def reporte(request, mes = '1', año = '2018'):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ReporteForm(request.POST)
+        año = request.POST['mes']
+        mes = request.POST['año']
+        return HttpResponseRedirect(reverse_lazy('reporte_mes', args = (año, mes)))
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ReporteForm(initial = {'mes':1 , 'año': 2018})
+
+    return render(request, 'crear.html', {'form': form})
+
+class ReporteMesView(TemplateView):
+    template_name = "reporte.html"
+    mes_choise = {'1' : 'Enero',
+                  '2' : 'Febrero',
+                  '3' :'Marzo',
+                  '4' : 'Abril',
+                  '5' : 'Mayo',
+                  '6' : 'Junio',
+                  '7' : 'Julio',
+                  '8' : 'Agosto',
+                  '9' : 'Septiembre',
+                  '10' : 'Octubre',
+                  '11' : 'Noviembre',
+                  '12' : 'Diciembre'}
+    def comprobarventa(self, mes , año):
+        self.ventas = Venta.objects.filter(fecha_creacion__year = año).filter(fecha_creacion__month = mes)
+        if self.ventas:
+            return True
+        else:
+            return False
+
+    def comprobarproduccion(self, mes , año):
+        self.produccion = Produccion.objects.filter(fecha_creacion__year = año).filter(fecha_creacion__month = mes)
+        self.productoproduccion = ProductoProduccion.objects.filter(produccion__fecha_creacion__year = año).filter(produccion__fecha_creacion__month = mes)
+        self.verde = self.productoproduccion.aggregate(total=Sum('cantidad_para_producir'))['total']
+        self.tostado = self.productoproduccion.aggregate(total=Sum('cantidad_producido'))['total']
+        if self.produccion and self.productoproduccion:
+            return True
+        else:
+            return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        mes = kwargs.get('mes')
+        año = kwargs.get('año')
+        context['mes'] = self.mes_choise.get(mes)
+        context['año'] = año
+        if self.comprobarventa(mes,año) == True:
+            context['existeventas'] = True
+            context['cantidad'] = len(self.ventas)
+            context['tableventas'] = VentaTable(self.ventas)
+            context['pagado'] = self.ventas.aggregate(total=Sum('a_cuenta'))['total']
+            context['no_pagado'] = self.ventas.aggregate(total=Sum('falta'))['total']
+            context['total'] = self.ventas.aggregate(total=Sum('total'))['total']
+        else:
+            context['existeventas'] = False
+
+        if self.comprobarproduccion(mes,año) == True:
+            context['existeproduccion'] = True
+            context['cantidadproduccion'] = len(self.produccion)
+            context['verde'] = self.verde
+            context['tostado'] = self.tostado
+            context['tableprodcuccion'] = ProductoProduccionTable(self.productoproduccion)
+        else:
+            context['existeproduccion'] = False
+        return context

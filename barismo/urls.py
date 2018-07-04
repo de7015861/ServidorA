@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^cliente/', include('cliente.urls')),
     url(r'^venta/', include('venta.urls')),
     url(r'^produccion/', include('produccion.urls')),
+    url(r'^reporte/', include('reporte.urls')),
     url(r'^login/$', auth_views.login,{'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'producto'}, name='logout'),
 ]
